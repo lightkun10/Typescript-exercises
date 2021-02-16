@@ -1,7 +1,7 @@
-interface InputsCalc {
-  target: number,
-  hours: Array<number>
-}
+// interface InputsCalc {
+//   target: number,
+//   hours: Array<number>
+// }
 
 interface Result {
   periodLength: number,
@@ -34,7 +34,7 @@ const calculateExercises = (hours: Array<number>, target: number): Result => {
     if (day > 0) totalDays++;
     return totalDays;
   }, 0);
-  const rating = success ? 3 : (average > 1) ? 2 : 1;
+  const rating = success ? 3 : (average > 1.3) ? 2 : 1;
 
   const ratingDescription = generateRating(rating);
 
@@ -49,25 +49,27 @@ const calculateExercises = (hours: Array<number>, target: number): Result => {
   };
 };
 
-const parseExercisesArgs = (argsNum: Array<string>): InputsCalc => {
-  if (argsNum.length < 4) throw new Error('Not enough arguments');
+// const parseExercisesArgs = (argsNum: Array<string>): InputsCalc => {
+//   if (argsNum.length < 4) throw new Error('Not enough arguments');
 
-  const target = Number(argsNum[2]);
-  if (isNaN(target)) throw new Error("target hour must be a number");
+//   const target = Number(argsNum[2]);
+//   if (isNaN(target)) throw new Error("target hour must be a number");
 
-  const hours = [];
-  for (let i = 3; i < argsNum.length; i++) {
-    hours.push(Number(argsNum[i]));
-  }
+//   const hours = [];
+//   for (let i = 3; i < argsNum.length; i++) {
+//     hours.push(Number(argsNum[i]));
+//   }
 
-  return {
-    target, hours
-  };
-};
+//   return {
+//     target, hours
+//   };
+// };
 
-try {
-  const{ hours, target } = parseExercisesArgs(process.argv);
-  console.log(calculateExercises(hours, target));
-} catch(e) {
-  console.log(e);
-}
+// try {
+//   const{ hours, target } = parseExercisesArgs(process.argv);
+//   console.log(calculateExercises(hours, target));
+// } catch(e) {
+//   console.log(e);
+// }
+
+export default calculateExercises;
