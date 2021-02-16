@@ -11,7 +11,7 @@ interface Result {
   ratingDescription: string,
   target: number,
   average: number
-};
+}
 
 const generateRating = (rating: number): string => {
   switch (rating) {
@@ -24,7 +24,7 @@ const generateRating = (rating: number): string => {
     default:
       return '';
   }
-}
+};
 
 const calculateExercises = (hours: Array<number>, target: number): Result => {
   const periodLength = hours.length;
@@ -36,7 +36,7 @@ const calculateExercises = (hours: Array<number>, target: number): Result => {
   }, 0);
   const rating = success ? 3 : (average > 1) ? 2 : 1;
 
-  let ratingDescription = generateRating(rating);
+  const ratingDescription = generateRating(rating);
 
   return {
     periodLength,
@@ -46,8 +46,8 @@ const calculateExercises = (hours: Array<number>, target: number): Result => {
     ratingDescription,
     target,
     average
-  }
-}
+  };
+};
 
 const parseExercisesArgs = (argsNum: Array<string>): InputsCalc => {
   if (argsNum.length < 4) throw new Error('Not enough arguments');
@@ -55,15 +55,15 @@ const parseExercisesArgs = (argsNum: Array<string>): InputsCalc => {
   const target = Number(argsNum[2]);
   if (isNaN(target)) throw new Error("target hour must be a number");
 
-  let hours = [];
+  const hours = [];
   for (let i = 3; i < argsNum.length; i++) {
     hours.push(Number(argsNum[i]));
   }
 
   return {
     target, hours
-  }
-}
+  };
+};
 
 try {
   const{ hours, target } = parseExercisesArgs(process.argv);

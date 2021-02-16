@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express();
 
-import { calculateBmi as CalculateBmi } from './bmiCalculator';
+import calculateBmi from './bmiCalculator';
 
 app.get('/hello', (_req, res) => {
   res.send("Hello Full Stack!");
@@ -20,8 +20,8 @@ app.get('/bmi', (req, res) => {
   return res.status(200).json({
     weight,
     height,
-    bmi: CalculateBmi(height, weight),
-  })
+    bmi: calculateBmi(height, weight),
+  });
 });
 
 const PORT = 3003;

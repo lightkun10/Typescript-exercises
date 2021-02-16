@@ -1,7 +1,7 @@
 interface Inputs { 
   height: number, 
   weight: number 
-};
+}
 
 const parseArguments = (args: Array<string>): Inputs => {
   if (args.length < 4) throw new Error('Not enough arguments');
@@ -11,13 +11,13 @@ const parseArguments = (args: Array<string>): Inputs => {
     return { 
       height: Number(args[2]),
       weight: Number(args[3])
-    }
+    };
   } else {
     throw new Error("Provided values were not numbers!");
   }
-}
+};
 
-export const calculateBmi = (height: number, weight: number): string => {
+const calculateBmi = (height: number, weight: number): string => {
   height /= 100; // cm to m
   const bmi = weight / (height * height);
 
@@ -41,7 +41,7 @@ export const calculateBmi = (height: number, weight: number): string => {
     default:
       return '';
   }
-}
+};
 
 try {
   const { height, weight } = parseArguments(process.argv);
@@ -49,3 +49,5 @@ try {
 } catch(e) {
   console.log(e);
 }
+
+export default calculateBmi;
