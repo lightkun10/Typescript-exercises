@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 
 import diagnosesRouter from './routes/diagnoses';
-import patientsRouter from './routes/patients';
+import patientsRouter from './routes/patientRoutes';
 
 const app = express();
 app.use(cors());
