@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const diagnoses_1 = __importDefault(require("./routes/diagnoses"));
+const patientRoutes_1 = __importDefault(require("./routes/patientRoutes"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(express_1.default.json());
@@ -16,8 +17,10 @@ router.get('/ping', (_req, res) => {
     console.log('someone pinged here');
     res.send('pong');
 });
+/** Routers */
 app.use('/api', router);
 app.use('/api/diagnoses', diagnoses_1.default);
+app.use('/api/patients', patientRoutes_1.default);
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
