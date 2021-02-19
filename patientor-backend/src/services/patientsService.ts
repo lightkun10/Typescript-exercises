@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import patientData from '../../data/patientEntries';
-import { NewPatientEntry, PatientEntry, Patient } from '../types';
+import patientData from '../../data/patients';
+import { NewPatientEntry, NonSsnPatient, Patient } from '../types';
 
 const genID = () => {
   const buf = Buffer.allocUnsafe(16);
@@ -9,7 +9,7 @@ const genID = () => {
 	return buf.toString('hex');
 };
 
-const getPatients = (): Array<Patient> => {
+const getPatients = (): Array<NonSsnPatient> => {
  return patientData.map((patient) => {
    return { ...patient, ssn: undefined };
  });
@@ -20,12 +20,12 @@ const getPatients = (): Array<Patient> => {
 //   return p;
 // };
 
-const getPatientByID = (id: string): PatientEntry | undefined => {
+const getPatientByID = (id: string): Patient | undefined => {
   const p = patientData.find((patient) => patient.id === id);
   return p;
 };
 
-const addPatient = (patient: NewPatientEntry): PatientEntry => {
+const addPatient = (patient: NewPatientEntry): Patient => {
   const newPatientEntry = {
     id: genID(),
     ...patient
