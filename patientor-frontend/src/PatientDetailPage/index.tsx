@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { apiBaseUrl } from "../constants";
 import { getPatientInfo, useStateValue } from "../state";
-import { Gender, Patient } from "../types";
+import { Entry, Gender, Patient } from "../types";
 import { Header, Icon } from "semantic-ui-react";
 
 const genderIcon = (gender: Gender) => {
@@ -16,6 +16,26 @@ const genderIcon = (gender: Gender) => {
       return "genderless";
   }
 };
+
+const EntryItem: React.FC<{ entry: Entry }> = (props) => {
+  return (
+    <div key={props.entry.id}>
+      {props.entry.date} <i>{props.entry.description}</i>
+      
+      {props.entry.diagnosisCodes ? (
+        <ul>
+          {props.entry.diagnosisCodes.map((code) => (
+            <li key={code}>
+              {code} 
+            </li>
+          ))}
+        </ul>
+        )
+        : null
+      }
+    </div>
+  )
+}
 
 const PatientDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -38,7 +58,7 @@ const PatientDetailPage: React.FC = () => {
     fetchPatientDetail();
   }, [dispatch]);
   
-  console.log(patient);
+  // console.log(patient);
 
   if (!(patient && "ssn" in patient)) return (
     <div>loading...</div>
@@ -46,12 +66,26 @@ const PatientDetailPage: React.FC = () => {
   
   return (
     <div>
-      <Header as="h2">
-        {patient.name} <Icon name={genderIcon(patient.gender)}></Icon>
-      </Header>
-      ssn: {patient.ssn}
-      <br/>
-      occupation: {patient.occupation}
+      <div className="patient__main">
+        <Header as="h2">
+          {patient.name} <Icon name={genderIcon(patient.gender)}></Icon>
+        </Header>
+        ssn: {patient.ssn}
+        <br/>
+        occupation: {patient.occupation}
+      </div>
+      
+      <br></br>
+      
+      <div className="patient__entry">
+        <Header as="h3">entries</Header>
+        { patient.entries && patient.entries.length > 0 
+        ? patient.entries.map((entry) => 
+          <EntryItem key={entry.id} entry={entry} />
+        )
+        : <div>No entry for this particular patient.</div>
+        }
+      </div>
     </div>
   );
 };
