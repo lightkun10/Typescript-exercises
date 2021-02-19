@@ -18,6 +18,9 @@ const genderIcon = (gender: Gender) => {
 };
 
 const EntryItem: React.FC<{ entry: Entry }> = (props) => {
+  const [{ diagnoses }] = useStateValue();
+  console.log(diagnoses['F43.2'] ? diagnoses['F43.2'] : diagnoses['F43.2']);
+  
   return (
     <div key={props.entry.id}>
       {props.entry.date} <i>{props.entry.description}</i>
@@ -26,7 +29,7 @@ const EntryItem: React.FC<{ entry: Entry }> = (props) => {
         <ul>
           {props.entry.diagnosisCodes.map((code) => (
             <li key={code}>
-              {code} 
+              {code} {diagnoses[`${code}`] ? diagnoses[`${code}`].name : diagnoses[`${code}`]}
             </li>
           ))}
         </ul>
@@ -58,7 +61,9 @@ const PatientDetailPage: React.FC = () => {
     fetchPatientDetail();
   }, [dispatch]);
   
-  // console.log(patient);
+  console.log(patient);
+  console.log();
+  
 
   if (!(patient && "ssn" in patient)) return (
     <div>loading...</div>
