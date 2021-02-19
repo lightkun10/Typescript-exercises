@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -62,6 +63,7 @@ const toNewPatientEntry = (object: any): NewPatientEntry => {
     gender: parseGender(object.gender),
     occupation: parseOccupation(object.occupation),
     ssn: parseSsn(object.ssn),
+    entries: [],
   };
 };
 
