@@ -53,7 +53,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         diagnoses: {
           ...action.payload.reduce(
-            (acc, cur) => ({ ...acc, [cur.code]: cur }),
+            (memo, diagnosis) => ({ ...memo, [diagnosis.code]: diagnosis }),
             {}
           ),
           ...state.diagnoses

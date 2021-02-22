@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import { PatientEntry } from "../src/types";
 import toNewPatientEntry from "../src/utils";
 
@@ -49,6 +53,7 @@ const patientEntries: PatientEntry[] = data.map((obj) => {
   const object = toNewPatientEntry(obj) as PatientEntry;
 //   console.log(object);
   object.id = obj.id;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return object;
 });
 

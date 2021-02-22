@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import patientData from '../../data/patients';
-import { NewPatientEntry, NonSsnPatient, Patient } from '../types';
+import { Entry, NewPatientEntry, NonSsnPatient, Patient } from '../types';
 
 const genID = () => {
   const buf = Buffer.allocUnsafe(16);
@@ -27,14 +27,28 @@ const getPatientByID = (id: string): Patient | undefined => {
 
 const addPatient = (patient: NewPatientEntry): Patient => {
   const newPatientEntry = {
-    id: genID(),
-    ...patient
+    ...patient,
+    id: genID()
   };
 
   patientData.push(newPatientEntry);
   return newPatientEntry;
 };
 
+const addPatientEntry = (id: Patient['id'], entry: Entry): Entry | undefined => {
+  const patient = getPatientByID(id);
+  if (!patient) return undefined;
+
+  const newEntry = {
+    ...entry,
+    id: genID(),
+  } as Entry;
+
+  patient.entries.push(newEntry);
+  return newEntry;
+};
+
 export default {
-  getPatients, addPatient, getPatientByID
+  getPatients, addPatient, 
+  getPatientByID, addPatientEntry
 };
